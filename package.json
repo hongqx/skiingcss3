@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/hongqx/skiingcss3/issues"
   },
-  "homepage": "https://github.com/hongqx/skiingcss3#readme"
+  "homepage": "https://github.com/hongqx/skiingcss3#readme",
+  "devDependencies": {
+    "http-server": "^0.8.0"
+  }
 }
