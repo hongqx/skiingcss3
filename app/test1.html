@@ -3,6 +3,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="charset=utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,user-scalable=no">
+
 	<title>滑雪手机端页面</title>
 	<style type="text/css">
 	  body,html{
@@ -19,17 +20,23 @@
          overflow: hidden;
       }
       .snowman{
-      	width:150px;
-      	height:150px;
+      	width:60px;
+      	height:60px;
       	position:absolute;
-         top:20px;
-         left:-15px;
-         background:url(img/snowman2.png);
-         background-size:100% 100%;
-         animation:mymove 3s ease-in-out forwards;
+        top:20px;
+        left:-15px;
+        background:url(img/snowman2.png);
+        background-size:100% 100%;
+        opacity:0;
+        /* animation:mymove 3s ease-in-out forwards;
          -webkit-animation: mymove 3s ease-in-out  forwards;
-         -moz-animation:mymove 3s ease-in-out  forwards;
-   in-   -o-animation: mymove 3s ease-in-out  forwards;
+         -o-animation: mymove 3s ease-in-out  forwards;*/
+      }
+      .turn1{
+        animation:turn1 1s ease-in-out forwards;
+      }
+      @keyframes turn1 {
+        100%   {transform:rotate(60deg) scale(1.2,1.2);}
       }
       .snowman1{
          width:300px;
@@ -39,6 +46,7 @@
          left:-15px;
          background:url(img/snowman2.png);
          background-size:100% 100%;
+
          /*animation:mymove 3s ease-in forwards;*/
       }
      @keyframes mymove
@@ -77,12 +85,50 @@
 </head>
 <body>
 	<div class="container">
-		<div class="snowman"></div>
+		<div class="snowman" id="snowman"></div>
 		<!-- <div class="snowman1"></div> -->
 		<div class="snowroad"></div>
 	</div>
+   <script type="text/javascript" src="js/jquery.js"></script>
    <script type="text/javascript">
-      var hei 
+      function show(){
+          var dtd = $.Deferred();
+          $("#snowman").animate({
+             opacity:1
+          },1000,function(){
+             dtd.resolve();
+          });
+          return dtd;
+      }
+      function move(left,top,time,className){
+        var dtd = $.Deferred();
+        if(className){
+          $("#snowman").addClass(className);
+        }
+        $("#snowman").animate({
+           top:top+"px",
+           left:left+"px"
+        },time,function(){
+          dtd.resolve();
+        });
+        return dtd;
+      }
+      
+      function turn(deg,time){
+          var dtd = $.Deferred();
+          // $("#snowman").animate({
+          //  "transform":"rotate("+deg+"deg)"
+          // },time,function(){
+          //   dtd.resolve();
+          // });
+          return dtd;
+      }
+      var ani = show();
+      ani.then(function(){
+        return move(205,155,2000);
+      }).then(function(){
+        return move(105,205,"turn1");
+      });
    </script>
 </body>
 </html>

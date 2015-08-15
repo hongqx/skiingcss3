@@ -19,37 +19,66 @@
 		from{transform:scale(0.5,0.5);}
 		to {transform:scale(1,1);}
 	}
+	<style type="text/css">
 	.con{
 		width:100px;
 		height:100px;
 		position:absolute;
-		top:500px;
-		left:500px;
+		top:900px;
+		left:400px;
 		z-index:3000;
 		/*transition:width 1s,height 1s,transform 2s;*/
 		background-image:url(img/snowman.png) ;
 		background-size:100% 100%;
-		transform:rotate(-40deg);
 		opacity: 0;
-        animation:mymove 3s ease-in-out forwards;
-		
+		transform:rotate(-40deg);
+		-webkit-transform:rotate(-40deg);
+		-moz-transform:rotate(-40deg);
+		-o-transform:rotate(-40deg);
+	}
+	.conAni{
+		animation:mymove 3s ease-in-out forwards;
+		-webkit-animation:mymove 3s ease-in-out forwards;
+		-moz-nimation:mymove 3s ease-in-out forwards;
+		-o-animation:mymove 3s ease-in-out forwards;
 	}
    @keyframes mymove
 	{
 		0%   {opacity:0;}
-		3%   {opacity:1;transform:rotate(-40deg);}
-		20%  {top:300px; left:600px;}
-		40%  {top:300px; left:600px;transform:rotate(440deg);}
-		100%  {top:1100px; left:1100px;transform:rotate(440deg);}
-		100%  {opacity:1;}
-	   /* 0%    {opacity: 0;}
-		3%    {opacity:1;transform:rotate(-40deg);}
-		20%   {transform:translate(100px,-200px);}
-		21% {transform:translate(100px,-200px) rotate(0deg);}
-        40%   {transform:translate(200px,-50px) rotate(440deg);}
-		99%   {transform:translate(1100px,1100px) rotate(440deg);}
-		100%  {opacity:0;}*/
+		3%   {opacity:1;transform:rotate(-40deg);opacity:1;}
+		30%  {top:600px; left:600px;opacity:1;}
+		50%  {top:600px; left:700px;transform:rotate(440deg);opacity:1;}
+		99%  {top:1100px; left:1100px;transform:rotate(440deg);opacity:1;}
+		100%  {opacity:0;}
 	}
+	@-webkit-keyframes mymove
+	{
+		0%   {opacity:0;}
+		3%   {opacity:1;-webkit-transform:rotate(-40deg);}
+		30%  {top:600px; left:600px;}
+		50%  {top:600px; left:700px;-webkit-transform:rotate(440deg);}
+		99%  {top:1100px; left:1100px;-webkit-transform:rotate(440deg);}
+		100%  {opacity:0;}
+	}
+	@-moz-keyframes mymove
+	{
+		0%   {opacity:0;}
+		3%   {opacity:1;-moz-transform:rotate(-40deg);}
+		30%  {top:600px; left:600px;}
+		50%  {top:600px; left:700px;-moz-transform:rotate(440deg);}
+		99%  {top:1100px; left:1100px;-moz-transform:rotate(440deg);}
+		100%  {opacity:0;}
+	}
+	@-o-keyframes mymove
+	{
+		0%   {opacity:0;}
+		3%   {opacity:1;-o-transform:rotate(-40deg);}
+		30%  {top:600px; left:600px;}
+		50%  {top:600px; left:700px;-o-transform:rotate(440deg);}
+		99%  {top:1100px; left:1100px;-o-transform:rotate(440deg);}
+		100%  {opacity:0;}
+	}
+	</style>
 		
 
 </style>
@@ -62,7 +91,7 @@
 	var dom  = document.getElementById("animaDiv");
     var aDom =  document.getElementById("show");
     function show(){
-    	animaDiv.className="con conshow";
+    	animaDiv.className="con conAni";
     }
    //aDom.click = function(){show();}
 </script>
