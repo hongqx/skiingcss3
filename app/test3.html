@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="charset=utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,user-scalable=no">
+	<title>滑雪手机端页面</title>
+	<style type="text/css">
+	  *{
+	  	margin:0;
+	  	padding:0;
+	  }
+    html,body{
+      width:100%;
+      height: 100%;
+    }
+      .container{
+      	width:100%;
+      	height:100%;
+      	background-color:black;
+      	position:relative;
+      	background:url(img/bg.jpg);
+      	background-size:100% 100%;
+         overflow: hidden;
+      }
+      .snowman{
+      	width:150px;
+      	height:150px;
+      	position:absolute;
+         top:20px;
+         left:-15px;
+         background:url(img/snowman2.png);
+         background-size:100% 100%;
+         opacity: 0;
+      }
+      .snowMove{
+         -webkit-animation: mymove 3s ease-in-out  forwards;
+      }
+   
+    /*   @-webkit-keyframes mymove
+         {
+    0%   {-webkit-transform:translate3d(0,0,0) scale(.4,.4);}
+    15% {-webkit-transform:translate3d(200px,140px,0) scale(.4,.4);}
+    30% {
+      -webkit-transform:translate3d(200px,140px,0) scale(.4,.4) rotate(100deg);-webkit-transform-origin:center center;
+    }
+    60%{
+      {-webkit-transform:translate3d(80px,180px,0) scale(.5,.5) rotate(100deg); -webkit-transform-origin:center center;}
+    }
+    100% {-webkit-transform:translate3d(210px,400px,0) scale(1,1) rotate(10deg);-webkit-transform-origin:center center;}  
+    } */
+       @-webkit-keyframes mymove
+     {
+      0%   {
+        -webkit-transform:translate3d(0,0,0) scale(.4,.4);
+        -webkit-transform-origin:center center;
+        opacity: 1;
+      }
+      15% {
+        -webkit-transform:translate3d(200px,140px,0) scale(.4,.4);
+        -webkit-transform-origin:center center;
+      }
+      30% {
+        -webkit-transform:translate3d(200px,140px,0) scale(.4,.4) rotate(120deg);
+        -webkit-transform-origin:center center;
+      }
+      40%{
+        {
+        -webkit-transform:translate3d(100px,200px,0) scale(.5,.5) rotate(120deg); 
+        -webkit-transform-origin:center center;}
+      }
+      60% {
+        -webkit-transform:translate3d(80px,200px,0) scale(.5,.5) rotate(80deg);
+        -webkit-transform-origin:center center; 
+        }
+      70% {
+        -webkit-transform:translate3d(80px,200px,0) scale(.5,.5) rotate(50deg);
+        -webkit-transform-origin:center center;
+      } 
+      100% {
+        -webkit-transform:translate3d(200px,450px,0) scale(1,1) rotate(10deg);
+        -webkit-transform-origin:center center;
+        opacity: 1;
+      }  
+      }
+      .buttons{
+        width:100%;
+        height:60px;
+        position: relative;
+        top:85%;
+        opacity: 0;
+      }
+      .buttonsshow{
+        -webkit-animation:showButton 4s ease-in-out  forwards;;
+      }
+      .buttons .download{
+        display: block;
+        position: absolute;
+        width:40%;
+        height: 100%;
+        left: 10%;
+        background:url("img/download.jpg") no-repeat;
+        background-size:80% 80%;
+      }
+      .buttons .toapp{
+        display: block;
+        width:40%;
+        height: 100%;
+        position: absolute;
+        right: 10%;
+        background:url("img/toapp.jpg") no-repeat;
+        background-size:80% 80%;
+      }
+      @-webkit-keyframes showButton{
+        0%{opacity: 0}
+        50%{opacity: 0}
+        100%{opacity: 1}
+      }
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="snowman" id="snowman"></div>
+		<!-- <div class="snowman1"></div> -->
+		<div class="buttons" id="js_butshow">
+      <a href="javascript:void(0);" id="js_download" class="download"></a>  
+      <a href="javascript:void(0);" id="js_toapp" class="toapp"></a>
+    </div>
+	</div>
+  <script type="text/javascript">
+    function addMoveClass(){
+      var dom =  document.getElementById("snowman");
+      var className = dom.className;
+      dom.className = className.indexOf("snowMove") > -1 ? className: (className+" snowMove");
+      var buttons = document.getElementById("js_butshow");
+      var bClassName = buttons.className;
+      buttons.className = bClassName.indexOf("buttonsshow") > -1 ? bClassName: (bClassName+" buttonsshow");
+
+    }
+    function addAction(){
+       var _download = document.getElementById("js_download");
+       _download.addEventListener("click",function(){
+            var a = navigator.userAgent;
+            if(a.indexOf("iPhone") > -1){
+               window.open("http://m.youku.com/webapp/dl?app=youku&source=webqr");
+            }else{
+               window.open("http://dl.m.cc.youku.com/android/phone/Youku_Android_xianbobofangye.apk");
+            }
+        });
+       var _toapp = document.getElementById("js_toapp");
+      _toapp.addEventListener("click",function(){
+            var a = navigator.userAgent;
+            var frame=document.createElement("iframe");
+            frame.height=0;
+            frame.width=0;
+            frame.frameBorder = 'no';
+            frame.src="youku://play?source=mplaypage4";
+            if(a.indexOf("ipad")>-1){
+                frame.src="youkuhd://play?source=mplaypage4";
+            }
+            document.getElementsByTagName('body')[0].appendChild(frame);
+            });
+    }
+    addMoveClass();
+    addAction();
+  </script>
+</body>
+</html>
